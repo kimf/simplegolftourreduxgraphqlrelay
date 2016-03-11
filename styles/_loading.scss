@@ -1,0 +1,40 @@
+#loading.overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #0092DB;
+  z-index: 999999;
+  transition: opacity 600ms;
+  @include transition (all 0.5s ease-in-out 0.5s);
+
+
+  &.hidden {
+    opacity: 0;
+    height: 0;
+    top: -100px
+  }
+
+  .progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 118px;
+    margin: -100px 0 0 -100px;
+    background: url('/images/logo_empty.png');
+    background-size: 200px 118px;
+  }
+
+  .bar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    min-width: 0px;
+    background: url('/images/logo.png');
+    background-size: 200px 118px;
+  }
+
+}

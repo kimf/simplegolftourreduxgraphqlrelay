@@ -1,0 +1,6 @@
+.main{
+  @include outer-container;
+  padding-left: 200px;
+  padding-top: 80px;
+  float: left;
+}

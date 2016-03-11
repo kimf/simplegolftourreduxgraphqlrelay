@@ -1,0 +1,86 @@
+aside.sidebar{
+  position: fixed;
+  background: $blue;
+  width: 180px;
+  height: 100%;
+  color: #fff;
+
+  figure {
+    width: 100%;
+    float: left;
+    text-align: center;
+    margin: 0; padding: 20px 0;
+  }
+
+  .logo{
+    background: darken($blue, 10%);
+    height: 60px;
+    margin-bottom: 20px;
+
+    img{
+      width: 140px;
+      position: absolute;
+      top: 5px;
+      left: 20px;
+    }
+  }
+
+  h4{
+    margin: 0;
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 0 5px 20px;
+    font-size: 1em;
+    color: darken($blue, 20%);
+    text-transform: uppercase;
+  }
+
+  a {
+    float: left;
+    width: 100%;
+    color: #eee;
+    font-size: 0.8em;
+    text-transform: uppercase;
+
+    &:hover {
+      color: lighten($blue, 20%);
+    }
+
+    &.active {
+      font-weight: bold;
+      color: #fff;
+      background: darken($blue, 5%);
+      border-left: 2px solid darken($blue, 50%);
+      text-indent: -2px;
+    }
+  }
+
+
+  .bottom{
+    position: absolute;
+    bottom: 0;
+    padding: 20px 0;
+    a{
+      padding: 0 20px;
+    }
+  }
+
+
+  nav{
+    float: left;
+    width: 100%;
+    padding: 20px 0 0 0;
+
+    li {
+      float: left;
+      width: 100%;
+      box-sizing: border-box;
+
+      a {
+        padding: 5px 20px;
+        border-bottom: 1px dashed darken($blue, 10%);
+      }
+    }
+  }
+}
