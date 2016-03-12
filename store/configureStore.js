@@ -12,7 +12,7 @@ export default function configureStore(initialState) {
         thunkMiddleware,
         createLogger({
           collapsed: true,
-          stateTransformer: state => state.toJS()
+          stateTransformer: state => state.userReducer.toJS()
         })
       ),
       window.devToolsExtension ? window.devToolsExtension() : f => f

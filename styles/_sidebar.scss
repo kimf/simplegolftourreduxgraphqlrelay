@@ -46,16 +46,15 @@ aside.sidebar{
     &:hover {
       color: lighten($blue, 20%);
     }
-
-    &.active {
-      font-weight: bold;
-      color: #fff;
-      background: darken($blue, 5%);
-      border-left: 2px solid darken($blue, 50%);
-      text-indent: -2px;
-    }
   }
 
+  li.active a {
+    font-weight: bold;
+    color: #fff;
+    background: darken($blue, 5%);
+    border-left: 2px solid darken($blue, 50%);
+    text-indent: -2px;
+  }
 
   .bottom{
     position: absolute;

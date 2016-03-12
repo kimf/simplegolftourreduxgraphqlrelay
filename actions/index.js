@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch'
 
 export const REQUEST_USER_DATA = 'REQUEST_USER_DATA'
 export const RECEIVE_USER_DATA = 'RECEIVE_USER_DATA'
+export const SET_CURRENT_SECTION = 'SET_CURRENT_SECTION'
 
 function requestUser() {
   return {
@@ -37,10 +38,11 @@ function fetchUser(userId) {
 }
 
 function shouldFetchUser(state) {
-  if (state.get('user').isEmpty()) {
+  const { userReducer } = state
+  if (userReducer.get('user').isEmpty()) {
     return true
   }
-  if (state.get('isFetching')) {
+  if (userReducer.get('isFetching')) {
     return false
   }
   return true
@@ -52,5 +54,12 @@ export function fetchUserIfNeeded(userId) {
       return dispatch(fetchUser(userId))
     }
     return null
+  }
+}
+
+export function setCurrentSection(section) {
+  return {
+    type: SET_CURRENT_SECTION,
+    section
   }
 }

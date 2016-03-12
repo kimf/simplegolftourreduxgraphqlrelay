@@ -1,32 +1,32 @@
 import React, { PropTypes } from 'react'
-import Tours from './Tours'
 import User from './User'
-import MainNav from './MainNav'
+import Sidebar from './Sidebar'
 
-const SimpleGolftour = ({ user }) => {
-  const activeSection = 'user'
-  const currentSection = <User user={user} />
-  const logoSrc = require('../styles/images/logo.png')
+const setCurrentSectionComponent = (route, user) => {
+  switch (route) {
+    case 'schedule':
+      return (<div><h1>Schedule</h1></div>)
+    case 'settings':
+      return (<div><h1>Settings</h1></div>)
+    default:
+      return <User user={user} />
+  }
+}
+
+const SimpleGolftour = ({ user, currentSection, changeSection }) => {
+  const currentSectionComponent = setCurrentSectionComponent(currentSection, user)
+
   return (
     <div className="application">
-      <aside className="sidebar">
-        <figure className="logo">
-          <img src={logoSrc} alt="Logo Image" />
-        </figure>
-
-        <MainNav activeSection={activeSection} title={user.name} />
-
-        <Tours tours={user.tours} />
-
-        <div className="bottom">
-          <ul>
-            <li><a href="/">Logout</a></li>
-          </ul>
-        </div>
-      </aside>
+      <Sidebar
+        title={user.name}
+        tours={user.tours}
+        activeSection={currentSection}
+        changeSection={changeSection}
+      />
 
       <section className="main">
-        { currentSection }
+        { currentSectionComponent }
       </section>
     </div>
   )
@@ -34,10 +34,12 @@ const SimpleGolftour = ({ user }) => {
 
 SimpleGolftour.propTypes = {
   user: PropTypes.shape({
-    name: PropTypes.string,
-    email: PropTypes.string,
-    tours: PropTypes.array
-  })
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    tours: PropTypes.array.isRequired
+  }),
+  currentSection: PropTypes.string.isRequired,
+  changeSection: PropTypes.func.isRequired
 }
 
 export default SimpleGolftour

@@ -1,12 +1,15 @@
 import { Map as map } from 'immutable'
-// import { combineReducers } from 'redux'
+import { combineReducers } from 'redux'
 import {
-  REQUEST_USER_DATA, RECEIVE_USER_DATA
+  REQUEST_USER_DATA,
+  RECEIVE_USER_DATA,
+  SET_CURRENT_SECTION
 } from '../actions'
 
 const immutableState = map({
   isFetching: false,
-  user: map({})
+  user: map({}),
+  currentSection: 'overview'
 })
 
 function userReducer(state = immutableState, action) {
@@ -21,4 +24,18 @@ function userReducer(state = immutableState, action) {
   }
 }
 
-export default userReducer
+function sectionReducer(state = 'overview', action) {
+  switch (action.type) {
+    case SET_CURRENT_SECTION:
+      return action.section
+    default:
+      return state
+  }
+}
+
+const rootReducer = combineReducers({
+  userReducer,
+  sectionReducer
+})
+
+export default rootReducer

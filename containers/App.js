@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchUserIfNeeded } from '../actions'
+import { fetchUserIfNeeded, setCurrentSection } from '../actions'
 import SimpleGolftour from '../components/SimpleGolftour'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
@@ -13,6 +13,15 @@ class App extends Component {
     const { dispatch } = this.props
     dispatch(fetchUserIfNeeded(135563))
   }
+
+  changeSection(section) {
+    const { dispatch } = this.props
+    dispatch(setCurrentSection(section))
+  }
+
+  // changeTour(e, tourId) {
+  //   //this.props.dispatch(setCurrentTour(tourId))
+  // }
 
   renderLoading(isEmpty) {
     let loading = ''
@@ -31,12 +40,16 @@ class App extends Component {
   }
 
   render() {
-    const { user } = this.props
+    const { user, currentSection } = this.props
     const isEmpty = Object.keys(user).length === 0
     return (
       <div>
         {this.renderLoading(isEmpty)}
-        {isEmpty ? (<div></div>) : <SimpleGolftour user={user} />}
+        {
+          isEmpty
+            ? (<div></div>)
+            : <SimpleGolftour user={user} currentSection={currentSection} changeSection={this.changeSection.bind(this)} />
+        }
       </div>
     )
   }
@@ -45,15 +58,19 @@ class App extends Component {
 App.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
+  currentSection: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
-  const isFetching = state.get('isFetching')
-  const user = state.get('user').toJS()
+  const { userReducer, sectionReducer } = state
+  const isFetching = userReducer.get('isFetching')
+  const user = userReducer.get('user').toJS()
+  const currentSection = sectionReducer
   return {
     isFetching,
-    user
+    user,
+    currentSection
   }
 }
 
