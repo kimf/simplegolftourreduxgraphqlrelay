@@ -1,14 +1,14 @@
-@import "bourbon";
+@import 'bourbon';
 
-@import "bitters/variables";
-@import "bitters/grid-settings";
-@import "bitters/buttons";
-@import "bitters/forms";
-@import "bitters/lists";
-@import "bitters/tables";
-@import "bitters/typography";
+@import 'bitters/variables';
+@import 'bitters/grid-settings';
+@import 'bitters/buttons';
+@import 'bitters/forms';
+@import 'bitters/lists';
+@import 'bitters/tables';
+@import 'bitters/typography';
 
-@import "neat";
+@import 'neat';
 
 body{
   margin: 0; padding: 0;
@@ -20,21 +20,9 @@ html,body{
   width: 100%;
 }
 
-.publicsite{
-  .wrapper{
-    @include clearfix;
-    @include outer-container;
-
-    &#login, &#signup{
-      @include span-columns(6);
-    }
-  }
-  @import "publicsite/base";
-}
-
 .application{
-  @import "loading";
-  @import "sidebar";
-  @import "main";
-  @import "content-header";
+  @import 'loading';
+  @import 'sidebar';
+  @import 'main';
+  @import 'content-header';
 }

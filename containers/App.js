@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { fetchUserIfNeeded } from '../actions'
 import SimpleGolftour from '../components/SimpleGolftour'
 import Loading from '../components/Loading'
-// import '../styles/app.scss'
+import '../styles/app.scss'
 
 class App extends Component {
   componentDidMount() {

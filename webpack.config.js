@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -14,11 +14,14 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
-    preLoaders : [
-      {test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/}
+    preLoaders: [
+      {
+        test: /\.js$/,
+        loader: 'eslint-loader', exclude: /node_modules/
+      }
     ],
     loaders: [
       {
@@ -29,9 +32,19 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"],
+        loaders: ['style', 'css', 'sass'],
         include: path.join(__dirname, 'styles')
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192' // inline base64 URLs for <=8k images
       }
+    ]
+  },
+  sassLoader: {
+    includePaths: [
+      require('bourbon').includePaths,
+      require('bourbon-neat').includePaths
     ]
   },
   eslint: {

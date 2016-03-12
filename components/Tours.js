@@ -1,14 +1,16 @@
 import React, { PropTypes } from 'react'
 
 const Tours = ({ tours }) => (
-  <div className="tours-list">
+  <nav>
     <h4>Tours</h4>
     <ul>
       {tours.map((tour, i) =>
-        <li key={i}>{tour.name}</li>
+        <li key={i}>
+          <a href="/tours/x">{tour.name}</a>
+        </li>
       )}
     </ul>
-  </div>
+  </nav>
 )
 
 Tours.propTypes = {

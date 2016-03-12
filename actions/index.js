@@ -19,7 +19,7 @@ function receiveUser(json) {
 
 function fetchUser(userId) {
   const graphQLParams = {
-    query: '{ user(id: ' + userId + ') { id name email tours { id name custom_domain use_custom_domain seasons { id aggregate_count points_ladder use_reversed_points closed_at created_at updated_at, events { id, starts_at, scoring_type, team_event, status, gametype, course, created_at, updated_at, } } memberships { id nickname role user { id }}}}}'
+    query: `{ user(id: ${userId}) { id name email tours { id name custom_domain use_custom_domain seasons { id aggregate_count points_ladder use_reversed_points closed_at created_at updated_at, events { id, starts_at, scoring_type, team_event, status, gametype, course, created_at, updated_at, } } memberships { id nickname role user { id }}}}}`
   }
   return dispatch => {
     dispatch(requestUser())

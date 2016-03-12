@@ -6,18 +6,17 @@ import MainNav from './MainNav'
 const SimpleGolftour = ({ user }) => {
   const activeSection = 'user'
   const currentSection = <User user={user} />
+  const logoSrc = require('../images/logo.png')
   return (
     <div className="application">
       <aside className="sidebar">
         <figure className="logo">
-          <img src="/images/logo.png" alt="Logo Image" />
+          <img src={logoSrc} alt="Logo Image" />
         </figure>
 
         <MainNav activeSection={activeSection} title={user.name} />
 
-        <nav>
-          <Tours tours={user.tours} />
-        </nav>
+        <Tours tours={user.tours} />
 
         <div className="bottom">
           <ul>
