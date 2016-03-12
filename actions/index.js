@@ -19,17 +19,17 @@ function receiveUser(json) {
 
 function fetchUser(userId) {
   const graphQLParams = {
-    query: "{ user(id: "+userId+") { id name email tours { id name custom_domain use_custom_domain seasons { id aggregate_count points_ladder use_reversed_points closed_at created_at updated_at, events { id, starts_at, scoring_type, team_event, status, gametype, course, created_at, updated_at, } } memberships { id nickname role user { id } } } } } "
+    query: '{ user(id: ' + userId + ') { id name email tours { id name custom_domain use_custom_domain seasons { id aggregate_count points_ladder use_reversed_points closed_at created_at updated_at, events { id, starts_at, scoring_type, team_event, status, gametype, course, created_at, updated_at, } } memberships { id nickname role user { id }}}}}'
   }
   return dispatch => {
     dispatch(requestUser())
     return fetch('http://localhost:3000/queries', {
       method: 'post',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(graphQLParams),
+      body: JSON.stringify(graphQLParams)
     })
       .then(response => response.json())
       .then(json => dispatch(receiveUser(json)))
@@ -41,8 +41,9 @@ function shouldFetchUser(state) {
     return true
   }
   if (state.get('isFetching')) {
-      return false
+    return false
   }
+  return true
 }
 
 export function fetchUserIfNeeded(userId) {
@@ -50,5 +51,6 @@ export function fetchUserIfNeeded(userId) {
     if (shouldFetchUser(getState())) {
       return dispatch(fetchUser(userId))
     }
+    return null
   }
 }

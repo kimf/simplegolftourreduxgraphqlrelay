@@ -3,14 +3,9 @@ import { connect } from 'react-redux'
 import { fetchUserIfNeeded } from '../actions'
 import SimpleGolftour from '../components/SimpleGolftour'
 import Loading from '../components/Loading'
+// import '../styles/app.scss'
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   // this.handleChange = this.handleChange.bind(this)
-  //   // this.handleRefreshClick = this.handleRefreshClick.bind(this)
-  // }
-
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(fetchUserIfNeeded(135563))

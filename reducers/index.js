@@ -1,22 +1,21 @@
-import Immutable from "immutable";
-import { combineReducers } from 'redux'
+import { Map as map } from 'immutable'
+// import { combineReducers } from 'redux'
 import {
   REQUEST_USER_DATA, RECEIVE_USER_DATA
 } from '../actions'
 
-
-const immutableState = Immutable.Map({
+const immutableState = map({
   isFetching: false,
-  user: Immutable.Map({})
+  user: map({})
 })
 
 function userReducer(state = immutableState, action) {
   switch (action.type) {
     case REQUEST_USER_DATA:
-      return state.set("isFetching", true)
+      return state.set('isFetching', true)
     case RECEIVE_USER_DATA:
-      return state.set("isFetching", false)
-                  .set("user", Immutable.Map(action.user))
+      return state.set('isFetching', false)
+                  .set('user', map(action.user))
     default:
       return state
   }

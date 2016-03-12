@@ -10,8 +10,8 @@ export default function configureStore(initialState) {
     applyMiddleware(
       thunkMiddleware,
       createLogger({
-          collapsed: true,
-          stateTransformer: state => state.toJS()
+        collapsed: true,
+        stateTransformer: state => state.toJS()
       })
     )
   )
