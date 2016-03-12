@@ -10,18 +10,21 @@
 
 @import 'neat';
 
-body{
-  margin: 0; padding: 0;
-  background: #eee;
+body {
+  background: $lighter-gray;
+  margin: 0;
+  padding: 0;
 }
 
-html,body{
+html,
+body {
   height: 100%;
   width: 100%;
 }
 
-.application{
-  @import 'loading';
+@import 'loading';
+
+.application {
   @import 'sidebar';
   @import 'main';
   @import 'content-header';

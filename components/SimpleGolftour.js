@@ -6,7 +6,7 @@ import MainNav from './MainNav'
 const SimpleGolftour = ({ user }) => {
   const activeSection = 'user'
   const currentSection = <User user={user} />
-  const logoSrc = require('../images/logo.png')
+  const logoSrc = require('../styles/images/logo.png')
   return (
     <div className="application">
       <aside className="sidebar">

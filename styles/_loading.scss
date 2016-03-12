@@ -1,40 +1,53 @@
-#loading.overlay {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
+.overlay {
+  background-color: $lighter-blue;
   height: 100%;
-  background-color: #0092DB;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
   z-index: 999999;
-  transition: opacity 600ms;
-  @include transition (all 0.5s ease-in-out 0.5s);
-
-
-  &.hidden {
-    opacity: 0;
-    height: 0;
-    top: -100px
-  }
 
   .progress {
+    background: url('images/logo_empty.png');
+    background-size: 200px 118px;
+    height: 118px;
+    left: 50%;
+    margin: -100px 0 0 -100px;
     position: absolute;
     top: 50%;
-    left: 50%;
     width: 200px;
-    height: 118px;
-    margin: -100px 0 0 -100px;
-    background: url('/images/logo_empty.png');
-    background-size: 200px 118px;
   }
 
   .bar {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
-    min-width: 0px;
-    background: url('/images/logo.png');
+    animation: width 3s infinite;
+    background: url('images/logo.png');
     background-size: 200px 118px;
+    bottom: 0;
+    left: 0;
+    min-width: 0;
+    position: absolute;
+    top: 0;
   }
 
+}
+
+@keyframes width {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 200px;
+  }
+}
+
+.loading-leave {
+  opacity: 1;
+
+  &.loading-leave-active {
+    @include transition (all 500s ease-in-out 10s);
+    height: 0;
+    opacity: .1;
+    top: -100px;
+  }
 }
