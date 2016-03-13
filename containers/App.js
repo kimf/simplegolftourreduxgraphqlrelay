@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchUserIfNeeded, setCurrentSection } from '../actions'
+import {
+  fetchUserIfNeeded,
+  setCurrentSection,
+  setCurrentSeason
+} from '../actions'
 import SimpleGolftour from '../components/SimpleGolftour'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
@@ -9,19 +13,23 @@ import Loading from '../components/Loading'
 import '../styles/app.scss'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.changeSection = this.changeSection.bind(this)
+    this.changeSeason = this.changeSeason.bind(this)
+  }
+
   componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(fetchUserIfNeeded(135563))
+    this.props.dispatch(fetchUserIfNeeded(135563))
   }
 
-  changeSection(section) {
-    const { dispatch } = this.props
-    dispatch(setCurrentSection(section))
+  changeSection(section, tourId) {
+    this.props.dispatch(setCurrentSection(section, tourId))
   }
 
-  // changeTour(e, tourId) {
-  //   //this.props.dispatch(setCurrentTour(tourId))
-  // }
+  changeSeason(seasonId) {
+    this.props.dispatch(setCurrentSeason(seasonId))
+  }
 
   renderLoading(isEmpty) {
     let loading = ''
@@ -39,17 +47,30 @@ class App extends Component {
     )
   }
 
+  renderContainer(isEmpty, user, currentSection, tourId, activeSeason) {
+    let container = ''
+    if (!isEmpty) {
+      container = (
+        <SimpleGolftour
+          user={user}
+          currentSection={currentSection}
+          tourId={tourId}
+          changeSection={this.changeSection}
+          changeSeason={this.changeSeason}
+          activeSeason={activeSeason}
+        />
+      )
+    }
+    return container
+  }
+
   render() {
-    const { user, currentSection } = this.props
+    const { user, currentSection, tourId, activeSeason } = this.props
     const isEmpty = Object.keys(user).length === 0
     return (
       <div>
         {this.renderLoading(isEmpty)}
-        {
-          isEmpty
-            ? (<div></div>)
-            : <SimpleGolftour user={user} currentSection={currentSection} changeSection={this.changeSection.bind(this)} />
-        }
+        {this.renderContainer(isEmpty, user, currentSection, tourId, activeSeason)}
       </div>
     )
   }
@@ -59,6 +80,7 @@ App.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
   currentSection: PropTypes.string.isRequired,
+  tourId: PropTypes.number,
   dispatch: PropTypes.func.isRequired
 }
 
@@ -66,11 +88,15 @@ function mapStateToProps(state) {
   const { userReducer, sectionReducer } = state
   const isFetching = userReducer.get('isFetching')
   const user = userReducer.get('user').toJS()
-  const currentSection = sectionReducer
+  const currentSection = sectionReducer.get('section')
+  const tourId = sectionReducer.get('tourId')
+  const activeSeason = sectionReducer.get('seasonId')
   return {
     isFetching,
     user,
-    currentSection
+    currentSection,
+    tourId,
+    activeSeason
   }
 }
 

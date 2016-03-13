@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch'
 export const REQUEST_USER_DATA = 'REQUEST_USER_DATA'
 export const RECEIVE_USER_DATA = 'RECEIVE_USER_DATA'
 export const SET_CURRENT_SECTION = 'SET_CURRENT_SECTION'
+export const SET_CURRENT_SEASON = 'SET_CURRENT_SEASON'
 
 function requestUser() {
   return {
@@ -57,9 +58,17 @@ export function fetchUserIfNeeded(userId) {
   }
 }
 
-export function setCurrentSection(section) {
+export function setCurrentSection(section, tourId) {
   return {
     type: SET_CURRENT_SECTION,
-    section
+    section,
+    tourId
+  }
+}
+
+export function setCurrentSeason(seasonId) {
+  return {
+    type: SET_CURRENT_SEASON,
+    seasonId
   }
 }

@@ -3,7 +3,7 @@ import MainNav from './MainNav'
 import TourNav from './TourNav'
 const logoSrc = require('../styles/images/logo.png')
 
-const Sidebar = ({ title, tours, activeSection, changeSection }) => (
+const Sidebar = ({ title, tours, activeSection, changeSection, tourId }) => (
   <aside className="sidebar">
     <figure className="logo">
       <img src={logoSrc} alt="Logo Image" />
@@ -11,7 +11,7 @@ const Sidebar = ({ title, tours, activeSection, changeSection }) => (
 
     <MainNav activeSection={activeSection} title={title} changeSection={changeSection} />
 
-    <TourNav tours={tours} changeTour={changeSection} />
+    <TourNav tours={tours} tourId={tourId} changeTour={changeSection} />
 
     <div className="bottom">
       <ul>
@@ -25,7 +25,8 @@ Sidebar.propTypes = {
   title: PropTypes.string.isRequired,
   tours: PropTypes.array.isRequired,
   activeSection: PropTypes.string.isRequired,
-  changeSection: PropTypes.func.isRequired
+  changeSection: PropTypes.func.isRequired,
+  tourId: PropTypes.number
 }
 
 export default Sidebar

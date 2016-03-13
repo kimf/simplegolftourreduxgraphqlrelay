@@ -1,16 +1,30 @@
 header.contentheader{
   position: fixed;
   top: 0;
-  left: 180px;
+  left: 240px;
   height: 60px;
-  width: 100%;
+  @include calc(width, '100% - 240px');
   box-sizing: border-box;
   background: #fff;;
-  padding: 20px;
+  padding: 20px 40px;
 
 
   h2{
     font-size: 1.2em;
     color: darken($blue, 35%);
+    float: left;
+  }
+
+  ul {
+    float: right;
+
+    li {
+      display: inline-block;
+    }
+
+    a {
+      padding: 5px 10px;
+      float: left;
+    }
   }
 }

@@ -3,7 +3,8 @@ import { combineReducers } from 'redux'
 import {
   REQUEST_USER_DATA,
   RECEIVE_USER_DATA,
-  SET_CURRENT_SECTION
+  SET_CURRENT_SECTION,
+  SET_CURRENT_SEASON
 } from '../actions'
 
 const immutableState = map({
@@ -24,10 +25,19 @@ function userReducer(state = immutableState, action) {
   }
 }
 
-function sectionReducer(state = 'overview', action) {
+const sectionState = map({
+  section: 'overview',
+  seasonId: null,
+  tourId: null
+})
+
+function sectionReducer(state = sectionState, action) {
   switch (action.type) {
     case SET_CURRENT_SECTION:
-      return action.section
+      return state.set('section', action.section)
+                  .set('tourId', parseInt(action.tourId, 10))
+    case SET_CURRENT_SEASON:
+      return state.set('seasonId', parseInt(action.seasonId, 10))
     default:
       return state
   }

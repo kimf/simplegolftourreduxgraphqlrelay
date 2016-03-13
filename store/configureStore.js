@@ -3,6 +3,13 @@ import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import rootReducer from '../reducers'
 
+const stateTransformer = (state) => (
+  {
+    user: state.userReducer.toJS(),
+    section: state.sectionReducer.toJS()
+  }
+)
+
 export default function configureStore(initialState) {
   const store = createStore(
     rootReducer,
@@ -12,7 +19,7 @@ export default function configureStore(initialState) {
         thunkMiddleware,
         createLogger({
           collapsed: true,
-          stateTransformer: state => state.userReducer.toJS()
+          stateTransformer
         })
       ),
       window.devToolsExtension ? window.devToolsExtension() : f => f

@@ -1,7 +1,7 @@
 aside.sidebar{
   position: fixed;
   background: $blue;
-  width: 180px;
+  width: 240px;
   height: 100%;
   color: #fff;
 
@@ -9,19 +9,20 @@ aside.sidebar{
     width: 100%;
     float: left;
     text-align: center;
-    margin: 0; padding: 20px 0;
+    margin: 0;
+    padding: 20px 0;
   }
 
   .logo{
-    background: darken($blue, 10%);
+    background: darken($blue, 15%);
     height: 60px;
     margin-bottom: 20px;
 
     img{
       width: 140px;
       position: absolute;
-      top: 5px;
-      left: 20px;
+      top: 7px;
+      left: 50px;
     }
   }
 
@@ -32,7 +33,7 @@ aside.sidebar{
     box-sizing: border-box;
     padding: 5px 0 5px 20px;
     font-size: 1em;
-    color: darken($blue, 20%);
+    color: darken($blue, 40%);
     text-transform: uppercase;
   }
 
@@ -52,8 +53,8 @@ aside.sidebar{
     font-weight: bold;
     color: #fff;
     background: darken($blue, 5%);
-    border-left: 2px solid darken($blue, 50%);
-    text-indent: -2px;
+    border-left: 5px solid darken($blue, 50%);
+    text-indent: -5px;
   }
 
   .bottom{
@@ -69,7 +70,7 @@ aside.sidebar{
   nav{
     float: left;
     width: 100%;
-    padding: 20px 0 0 0;
+    margin: 20px 0;
 
     li {
       float: left;
@@ -77,7 +78,7 @@ aside.sidebar{
       box-sizing: border-box;
 
       a {
-        padding: 5px 20px;
+        padding: 10px 20px;
         border-bottom: 1px dashed darken($blue, 10%);
       }
     }

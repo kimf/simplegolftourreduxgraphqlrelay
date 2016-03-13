@@ -6,13 +6,13 @@ const MainNav = ({ title, activeSection, changeSection }) => (
 
     <ul>
       <li className={activeSection === 'overview' ? 'active' : ''}>
-        <a href="#" onClick={changeSection.bind(null, 'overview')}>Overview</a>
+        <a href="#" onClick={changeSection.bind(null, 'overview', null)}>Overview</a>
       </li>
       <li className={activeSection === 'schedule' ? 'active' : ''}>
-        <a href="#" onClick={changeSection.bind(null, 'schedule')}>Schedule</a>
+        <a href="#" onClick={changeSection.bind(null, 'schedule', null)}>Schedule</a>
       </li>
       <li className={activeSection === 'settings' ? 'active' : ''}>
-        <a href="#" onClick={changeSection.bind(null, 'settings')}>Settings</a>
+        <a href="#" onClick={changeSection.bind(null, 'settings', null)}>Settings</a>
       </li>
     </ul>
   </nav>
