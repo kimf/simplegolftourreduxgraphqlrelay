@@ -1,17 +1,42 @@
 import React, { PropTypes } from 'react'
-import MainNav from './MainNav'
-import TourNav from './TourNav'
+import { Link } from 'react-router'
+
 const logoSrc = require('../styles/images/logo.png')
 
-const Sidebar = ({ title, tours, activeSection, changeSection, tourId }) => (
+const Sidebar = ({ title, tours }) => (
   <aside className="sidebar">
     <figure className="logo">
       <img src={logoSrc} alt="Logo Image" />
     </figure>
 
-    <MainNav activeSection={activeSection} title={title} changeSection={changeSection} />
+    <nav>
+      <h4>{ title }</h4>
 
-    <TourNav tours={tours} tourId={tourId} changeTour={changeSection} />
+      <ul>
+        <li>
+          <Link to="/" activeClassName="active" onlyActiveOnIndex={true}>
+            Overview
+          </Link>
+        </li>
+        <li>
+          <Link to="/schedule" activeClassName="active">Schedule</Link>
+        </li>
+        <li>
+          <Link to="/settings" activeClassName="active">Settings</Link>
+        </li>
+      </ul>
+    </nav>
+
+    <nav>
+      <h4>Tours</h4>
+      <ul>
+        {tours.map(tour => (
+          <li key={tour.id}>
+            <Link to={`/tours/${tour.id}`} activeClassName="active">{tour.name}</Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
 
     <div className="bottom">
       <ul>
@@ -23,10 +48,7 @@ const Sidebar = ({ title, tours, activeSection, changeSection, tourId }) => (
 
 Sidebar.propTypes = {
   title: PropTypes.string.isRequired,
-  tours: PropTypes.array.isRequired,
-  activeSection: PropTypes.string.isRequired,
-  changeSection: PropTypes.func.isRequired,
-  tourId: PropTypes.number
+  tours: PropTypes.array.isRequired
 }
 
 export default Sidebar

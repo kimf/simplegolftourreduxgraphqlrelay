@@ -1,25 +1,38 @@
-var webpack = require('webpack')
-var webpackDevMiddleware = require('webpack-dev-middleware')
-var webpackHotMiddleware = require('webpack-hot-middleware')
-var config = require('./webpack.config')
+const webpack = require('webpack')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const fallback = require('express-history-api-fallback')
 
-var app = new (require('express'))()
-var port = 3100
+const config = require('./webpack.config')
 
-var compiler = webpack(config)
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
+const app = new (require('express'))()
+const port = 3100
+
+const compiler = webpack(config)
+
+app.use(
+  webpackDevMiddleware(
+    compiler, {
+      noInfo: true,
+      publicPath: config.output.publicPath
+    }
+  )
+)
+
 app.use(webpackHotMiddleware(compiler))
 
-app.get("/", function(req, res) {
-  res.sendFile(__dirname + '/index.html')
+app.use(fallback(__dirname + '/index.html'))
+
+app.get('/', (req, res) => {
+  res.sendFile(`${__dirname}/index.html`)
 })
 
-app.listen(port, function(error) {
+app.listen(port, (error) => {
   if (error) {
     console.error(error)
   } else {
     console.info(
-      "==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port
+      '==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port
     )
   }
 })

@@ -6,7 +6,7 @@ import rootReducer from '../reducers'
 const stateTransformer = (state) => (
   {
     user: state.userReducer.toJS(),
-    section: state.sectionReducer.toJS()
+    routing: state.routing
   }
 )
 

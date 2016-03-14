@@ -47,14 +47,14 @@ aside.sidebar{
     &:hover {
       color: lighten($blue, 20%);
     }
-  }
 
-  li.active a {
-    font-weight: bold;
-    color: #fff;
-    background: darken($blue, 5%);
-    border-left: 5px solid darken($blue, 50%);
-    text-indent: -5px;
+    &.active {
+      font-weight: bold;
+      color: #fff;
+      background: darken($blue, 5%);
+      border-left: 5px solid darken($blue, 50%);
+      text-indent: -5px;
+    }
   }
 
   .bottom{
