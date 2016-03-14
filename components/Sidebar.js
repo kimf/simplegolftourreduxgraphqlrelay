@@ -14,7 +14,7 @@ const Sidebar = ({ title, tours }) => (
 
       <ul>
         <li>
-          <Link to="/" activeClassName="active" onlyActiveOnIndex={true}>
+          <Link to="/" activeClassName="active" onlyActiveOnIndex>
             Overview
           </Link>
         </li>
