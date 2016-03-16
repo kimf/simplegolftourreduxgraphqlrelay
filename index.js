@@ -1,15 +1,9 @@
 import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import configureStore from './store/configureStore'
 
 import { IndexRoute, Router, Route, browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
 
-const store = configureStore()
-// Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store)
 const rootEl = document.getElementById('root')
 
 // /schedule
@@ -21,15 +15,13 @@ import Tour from './containers/Tour'
 
 let render = () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <Router history={history}>
-        <Route path="/" component={App}>
-           <IndexRoute component={User} />
-           <Route path="/tours/:id" component={Tour} />
-         </Route>
-        <App />
-      </Router>
-    </Provider>,
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+         <IndexRoute component={User} />
+         <Route path="/tours/:id" component={Tour} />
+       </Route>
+      <App />
+    </Router>,
     rootEl
   )
 }

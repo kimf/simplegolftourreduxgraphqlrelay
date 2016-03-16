@@ -1,28 +1,11 @@
 import React, { PropTypes, Component } from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-
-import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { fetchTourIfNeeded } from '../actions/tours'
-
 import InlineLoading from '../components/InlineLoading'
 
 class Tour extends Component {
-  componentDidMount() {
-    const tourId = this.props.tourId
-    this.props.dispatch(fetchTourIfNeeded(tourId))
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const {tourId, tour } = nextProps
-    if (tourId !== parseInt(tour.id, 10)) {
-      nextProps.dispatch(fetchTourIfNeeded(tourId))
-    }
-  }
-
   renderLoading(isFetching, isEmpty) {
     let loading = ''
-    if (isFetching || isEmpty) {
+    if (isFetching || isEmpty) {
       loading = <InlineLoading key="inline-loading-component" />
     }
     return (
@@ -112,18 +95,7 @@ Tour.propTypes = {
     id: PropTypes.string,
     leaderboard: PropTypes.array,
     events: PropTypes.array
-  }),
-  dispatch: PropTypes.func.isRequired
+  })
 }
 
-function mapStateToProps(state, ownProps) {
-  const { tourReducer } = state
-  const tourId = parseInt(ownProps.params.id, 10)
-  const isFetching = tourReducer.get('isFetching')
-  const tour = tourReducer.get('tour').toJS()
-  const currentSeason = tour.current_season || {}
-
-  return { isFetching, tourId, tour, currentSeason }
-}
-
-export default connect(mapStateToProps)(Tour)
+export default Tour

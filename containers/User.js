@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
 
 const User = ({ user }) => (
   <div>
@@ -24,11 +23,4 @@ User.propTypes = {
   })
 }
 
-function mapStateToProps(state) {
-  const { userReducer } = state
-  const user = userReducer.get('user').toJS()
-
-  return { user }
-}
-
-export default connect(mapStateToProps)(User)
+export default User

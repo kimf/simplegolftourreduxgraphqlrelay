@@ -15,17 +15,10 @@
     "es6-promise": "^3.1.2",
     "immutable": "^3.7.6",
     "isomorphic-fetch": "^2.2.1",
-    "pure-render-decorator": "^0.2.0",
     "react": "^15.0.0-rc.1",
     "react-addons-css-transition-group": "^15.0.0-rc.1",
     "react-dom": "^15.0.0-rc.1",
-    "react-reach": "^0.3.7",
-    "react-redux": "^4.4.0",
-    "react-router": "^2.0.1",
-    "react-router-redux": "^4.0.0-rc.2",
-    "redux": "^3.3.1",
-    "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.0.1"
+    "react-router": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.0",
