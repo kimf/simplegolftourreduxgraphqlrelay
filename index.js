@@ -1,30 +1,28 @@
 import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Relay from 'react-relay'
+import { RelayRouter } from 'react-router-relay'
+import { browserHistory } from 'react-router'
 
-import { IndexRoute, Router, Route, browserHistory } from 'react-router'
+import routes from './routes'
 
 const rootEl = document.getElementById('root')
 
-// /schedule
-// /tours/:id
-// /settings
-import App from './containers/App'
-import User from './containers/User'
-import Tour from './containers/Tour'
+const devBuild = process.env.NODE_ENV !== 'production'
+const apiUrl = devBuild ? 'http://localhost:3000/queries' : '/queries'
+
+Relay.injectNetworkLayer(
+  new Relay.DefaultNetworkLayer(apiUrl)
+)
 
 let render = () => {
   ReactDOM.render(
-    <Router history={browserHistory}>
-      <Route path="/" component={App}>
-         <IndexRoute component={User} />
-         <Route path="/tours/:id" component={Tour} />
-       </Route>
-      <App />
-    </Router>,
+    <RelayRouter history={browserHistory} routes={routes} />,
     rootEl
   )
 }
+
 
 if (module.hot) {
   // Support hot reloading of components
@@ -44,9 +42,9 @@ if (module.hot) {
       renderError(error)
     }
   }
-  module.hot.accept('./containers/App', () => {
-    setTimeout(render)
-  })
+  module.hot.accept('./layouts/SimpleGolftour', () => { setTimeout(render) })
+  module.hot.accept('./containers/Tour', () => { setTimeout(render) })
+  module.hot.accept('./containers/User', () => { setTimeout(render) })
 }
 
 render()

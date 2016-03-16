@@ -5,10 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "build": "NODE_ENV=production webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Kim Fransman <kim.fransman@gmail.com>",
   "license": "ISC",
+  "metadata": {
+    "graphql": {
+      "schema": "../server_simple_golftour/public/relay/schema.json"
+    }
+  },
   "dependencies": {
     "babel-polyfill": "^6.6.1",
     "bourbon-neat": "^1.7.4",
@@ -18,7 +24,9 @@
     "react": "^15.0.0-rc.1",
     "react-addons-css-transition-group": "^15.0.0-rc.1",
     "react-dom": "^15.0.0-rc.1",
-    "react-router": "^2.0.1"
+    "react-relay": "^0.7.3",
+    "react-router": "^2.0.1",
+    "react-router-relay": "^0.9.0"
   },
   "devDependencies": {
     "babel-core": "^6.7.0",
@@ -27,6 +35,7 @@
     "babel-preset-es2015": "^6.6.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
+    "babel-relay-plugin-loader": "^0.7.3",
     "bourbon": "^4.2.6",
     "css-loader": "^0.23.1",
     "eslint": "^2.4.0",
@@ -42,6 +51,7 @@
     "redbox-react": "^1.2.2",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
+    "sync-request": "^3.0.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-middleware": "^1.5.1",

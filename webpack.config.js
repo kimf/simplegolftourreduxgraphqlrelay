@@ -1,21 +1,37 @@
 const path = require('path')
 const webpack = require('webpack')
 
+const devBuild = process.env.NODE_ENV !== 'production'
+
+// new webpack.optimize.DedupePlugin(),
+
+const developmentPlugins = [
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.HotModuleReplacementPlugin()
+]
+
+const productionPlugins = [
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify('production')
+    }
+  })
+]
+
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  entry: [
+  devtool: devBuild ? 'cheap-module-eval-source-map' : 'source-map',
+  entry: devBuild ? [
     'webpack-hot-middleware/client',
     './index'
-  ],
+  ] : ['./index'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/dist/'
   },
-  plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  plugins: devBuild ? developmentPlugins : productionPlugins,
   module: {
     preLoaders: [
       {

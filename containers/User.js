@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import Relay from 'react-relay'
 
 const User = ({ user }) => (
   <div>
@@ -23,4 +24,15 @@ User.propTypes = {
   })
 }
 
-export default User
+const UserContainer = Relay.createContainer(User, {
+  fragments: {
+    user: () => Relay.QL`
+      fragment on User {
+        name
+      }
+    `
+  }
+})
+
+
+export default UserContainer

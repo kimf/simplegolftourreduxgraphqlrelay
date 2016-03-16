@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react'
+import Relay from 'react-relay'
 import Sidebar from '../components/Sidebar'
 import '../styles/app.scss'
 // const tour = user.tours.find(x => parseInt(x.id, 10) === tourId)
 
-const SimpleGolftour = ({ userName, tours, children }) => (
+const SimpleGolftour = ({ user, children }) => (
   <div className="application">
-    <Sidebar title={userName} tours={tours} />
+    <Sidebar title={user.name} tours={user.tours} />
 
     <section className="main">
       { children }
@@ -14,9 +15,26 @@ const SimpleGolftour = ({ userName, tours, children }) => (
 )
 
 SimpleGolftour.propTypes = {
-  userName: PropTypes.string.isRequired,
-  tours: PropTypes.array.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    tours: PropTypes.array.isRequired
+  }).isRequired,
   children: PropTypes.object.isRequired
 }
 
-export default SimpleGolftour
+const SimpleGolftourLayout = Relay.createContainer(SimpleGolftour, {
+  fragments: {
+    user: () => Relay.QL`
+      fragment on User {
+        id,
+        name,
+        tours {
+          id,
+          name
+        }
+      }
+    `
+  }
+})
+
+export default SimpleGolftourLayout
