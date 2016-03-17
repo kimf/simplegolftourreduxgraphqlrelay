@@ -10,7 +10,7 @@ import routes from './routes'
 const rootEl = document.getElementById('root')
 
 const devBuild = process.env.NODE_ENV !== 'production'
-const apiUrl = devBuild ? 'http://localhost:3000/queries' : '/queries'
+const apiUrl = devBuild ? 'http://localhost:8123/queries' : 'http://home.fransman.se:8123/queries'
 
 Relay.injectNetworkLayer(
   new Relay.DefaultNetworkLayer(apiUrl)
