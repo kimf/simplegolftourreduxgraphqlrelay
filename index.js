@@ -44,7 +44,6 @@ if (module.hot) {
   }
   module.hot.accept('./layouts/SimpleGolftour', () => { setTimeout(render) })
   module.hot.accept('./containers/Tour', () => { setTimeout(render) })
-  module.hot.accept('./containers/User', () => { setTimeout(render) })
 }
 
 render()

@@ -1,9 +1,33 @@
 aside.sidebar{
   position: fixed;
   background: $blue;
-  width: 240px;
+  width: 200px;
   height: 100%;
   color: #fff;
+
+  @include media($mobile) {
+    left: -180px;
+    figure {
+      &::after {
+        content: '=';
+        float: right;
+        font-size: 1.5em;
+        color: $lighter-gray;
+        position: fixed;
+        left: 5px;
+        top: 10px;
+        cursor: pointer;
+      }
+    }
+    &:hover {
+      left: 0;
+      z-index: 999;
+
+      figure::after {
+        display: none;
+      }
+    }
+  }
 
   figure {
     width: 100%;
@@ -22,7 +46,7 @@ aside.sidebar{
       width: 140px;
       position: absolute;
       top: 7px;
-      left: 50px;
+      left: 30px;
     }
   }
 

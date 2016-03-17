@@ -1,6 +1,10 @@
 .main{
   @include outer-container;
-  padding-left: 280px;
+  padding-left: 240px;
   padding-top: 80px;
   float: left;
+
+  @include media($mobile) {
+    padding: 80px 40px;
+  }
 }
