@@ -47,7 +47,7 @@ describe('Tour', () => {
 
   it('renders the events', () => {
     expect(wrapper.find('li').text()).to.contain(
-      'Skövde GKScrambleTomorrowPointsTeam event?'
+      'Skövde GKScrambleTomorrowPoints'
     )
   })
 })
