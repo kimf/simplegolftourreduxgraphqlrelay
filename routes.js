@@ -8,12 +8,18 @@ import Loading from './components/Loading'
 import InlineLoading from './components/InlineLoading'
 
 import SimpleGolftourLayout from './layouts/SimpleGolftour'
-import UserContainer from './containers/User'
 import TourContainer from './containers/Tour'
+
+import User from './components/User'
+import Schedule from './components/Schedule'
+import Settings from './components/Settings'
 
 export default (
   <Route path="/" component={SimpleGolftourLayout} queries={UserQueries} renderLoading={Loading}>
-    <IndexRoute component={UserContainer} queries={UserQueries} />
+    <IndexRoute component={User} />
+    <Route path="/schedule" component={Schedule} />
+    <Route path="/settings" component={Settings} />
+
     <Route
       path="/tours/:tourId"
       component={TourContainer}

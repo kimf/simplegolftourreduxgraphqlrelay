@@ -4,18 +4,18 @@ import Sidebar from '../components/Sidebar'
 import '../styles/app.scss'
 // const tour = user.tours.find(x => parseInt(x.id, 10) === tourId)
 
-const SimpleGolftour = ({ user, children }) => (
+const SimpleGolftour = ({ currentUser, children }) => (
   <div className="application">
-    <Sidebar title={user.name} tours={user.tours} />
+    <Sidebar title={currentUser.name} tours={currentUser.tours} />
 
     <section className="main">
-      { children }
+      {React.cloneElement(children, { currentUser })}
     </section>
   </div>
 )
 
 SimpleGolftour.propTypes = {
-  user: PropTypes.shape({
+  currentUser: PropTypes.shape({
     name: PropTypes.string.isRequired,
     tours: PropTypes.array.isRequired
   }).isRequired,
@@ -24,10 +24,11 @@ SimpleGolftour.propTypes = {
 
 const SimpleGolftourLayout = Relay.createContainer(SimpleGolftour, {
   fragments: {
-    user: () => Relay.QL`
+    currentUser: () => Relay.QL`
       fragment on User {
         id,
         name,
+        email,
         tours {
           id,
           name

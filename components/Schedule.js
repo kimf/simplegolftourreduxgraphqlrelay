@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react'
-import Relay from 'react-relay'
 
-const User = ({ user }) => (
+const Schedule = ({ currentUser }) => (
   <div>
     <header className="contentheader">
-      <h2>OVERVIEW FOR {user.name.toUpperCase()}</h2>
+      <h2>SCHEDULE FOR {currentUser.name.toUpperCase()}</h2>
     </header>
     <section className="content">
       loremLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -17,22 +16,11 @@ const User = ({ user }) => (
   </div>
 )
 
-User.propTypes = {
-  user: PropTypes.shape({
+Schedule.propTypes = {
+  currentUser: PropTypes.shape({
     name: PropTypes.string,
     email: PropTypes.string
   })
 }
 
-const UserContainer = Relay.createContainer(User, {
-  fragments: {
-    user: () => Relay.QL`
-      fragment on User {
-        name
-      }
-    `
-  }
-})
-
-
-export default UserContainer
+export default Schedule
