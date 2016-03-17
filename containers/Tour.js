@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 import Relay from 'react-relay'
 import { Link } from 'react-router'
 
-const Tour = ({ tour }) => (
+export const Tour = ({ tour }) => (
   <div>
     <header className="contentheader">
       <h2>{tour.name.toUpperCase()}</h2>

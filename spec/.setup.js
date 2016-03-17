@@ -1,4 +1,7 @@
 require('babel-register')();
+function noop() { return null }
+require.extensions['.scss'] = noop
+require.extensions['.png'] = noop
 
 // Uncomment to use mount
 

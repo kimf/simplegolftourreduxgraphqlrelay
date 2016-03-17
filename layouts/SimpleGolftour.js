@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar'
 import '../styles/app.scss'
 // const tour = user.tours.find(x => parseInt(x.id, 10) === tourId)
 
-const SimpleGolftour = ({ currentUser, children }) => (
+export const SimpleGolftour = ({ currentUser, children }) => (
   <div className="application">
     <Sidebar title={currentUser.name} tours={currentUser.tours} />
 
