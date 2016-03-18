@@ -12,8 +12,14 @@ const rootEl = document.getElementById('root')
 const devBuild = process.env.NODE_ENV !== 'production'
 const apiUrl = devBuild ? 'http://localhost:8123/queries' : 'http://home.fransman.se:8123/queries'
 
+const token = localStorage.getItem('session_token')
+
 Relay.injectNetworkLayer(
-  new Relay.DefaultNetworkLayer(apiUrl)
+  new Relay.DefaultNetworkLayer(apiUrl, {
+    headers: {
+      Authorization: `Token ${token}`
+    }
+  })
 )
 
 let render = () => {
