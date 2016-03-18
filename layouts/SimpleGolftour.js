@@ -1,26 +1,51 @@
 import React, { PropTypes } from 'react'
 import Relay from 'react-relay'
 import Sidebar from '../components/Sidebar'
+import auth from '../lib/AuthService'
+
 import '../styles/app.scss'
-// const tour = user.tours.find(x => parseInt(x.id, 10) === tourId)
 
-export const SimpleGolftour = ({ currentUser, children }) => (
-  <div className="application">
-    <Sidebar title={currentUser.name} tours={currentUser.tours} />
+const SimpleGolftour = React.createClass({
+  propTypes: {
+    currentUser: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      tours: PropTypes.array.isRequired
+    }).isRequired,
+    children: PropTypes.object.isRequired
+  },
 
-    <section className="main">
-      {React.cloneElement(children, { currentUser })}
-    </section>
-  </div>
-)
+  getInitialState() {
+    return { loggedIn: auth.loggedIn() }
+  },
 
-SimpleGolftour.propTypes = {
-  currentUser: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    tours: PropTypes.array.isRequired
-  }).isRequired,
-  children: PropTypes.object.isRequired
-}
+  componentWillMount() {
+    auth.onChange = this.updateAuth
+    auth.login()
+  },
+
+  updateAuth(loggedIn) {
+    this.setState({ loggedIn })
+  },
+
+  render() {
+    const { currentUser, children } = this.props
+    const { loggedIn } = this.state
+
+    return (
+      <div className="application">
+        <Sidebar title={currentUser.name} tours={currentUser.tours} loggedIn={loggedIn} />
+
+        <section className="main">
+          {
+            React.cloneElement(children, { currentUser })
+            ||
+            <p>You are {!loggedIn && 'not'} logged in.</p>
+          }
+        </section>
+      </div>
+    )
+  }
+})
 
 const SimpleGolftourLayout = Relay.createContainer(SimpleGolftour, {
   fragments: {

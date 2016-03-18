@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 const logoSrc = require('../styles/images/logo.png')
 
-const Sidebar = ({ title, tours }) => (
+const Sidebar = ({ title, tours, loggedIn }) => (
   <aside className="sidebar">
     <figure className="logo">
       <img src={logoSrc} alt="Logo Image" />
@@ -40,7 +40,13 @@ const Sidebar = ({ title, tours }) => (
 
     <div className="bottom">
       <ul>
-        <li><a href="/">Logout</a></li>
+        <li>
+          {loggedIn ? (
+            <Link to="/logout">Log out</Link>
+          ) : (
+            <Link to="/login">Sign in</Link>
+          )}
+        </li>
       </ul>
     </div>
   </aside>
@@ -48,7 +54,8 @@ const Sidebar = ({ title, tours }) => (
 
 Sidebar.propTypes = {
   title: PropTypes.string.isRequired,
-  tours: PropTypes.array.isRequired
+  tours: PropTypes.array.isRequired,
+  loggedIn: PropTypes.bool.isRequired
 }
 
 export default Sidebar

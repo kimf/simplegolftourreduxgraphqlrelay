@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import Relay from 'react-relay'
 import { RelayRouter } from 'react-router-relay'
 import { browserHistory } from 'react-router'
+import auth from './lib/AuthService'
 
 import routes from './routes'
 
@@ -12,12 +13,10 @@ const rootEl = document.getElementById('root')
 const devBuild = process.env.NODE_ENV !== 'production'
 const apiUrl = devBuild ? 'http://localhost:8123/queries' : 'http://home.fransman.se:8123/queries'
 
-const token = localStorage.getItem('session_token')
-
 Relay.injectNetworkLayer(
   new Relay.DefaultNetworkLayer(apiUrl, {
     headers: {
-      Authorization: `Token ${token}`
+      Authorization: `Token ${auth.getToken()}`
     }
   })
 )

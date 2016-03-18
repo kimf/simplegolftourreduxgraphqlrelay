@@ -8,3 +8,26 @@
     padding: 80px 40px;
   }
 }
+
+&.login .main {
+  padding: 100px 0;
+  float: none;
+  width: 400px;
+  text-align: center;
+}
+
+&.login form {
+  background: $lighter-gray;
+  padding: 20px;
+
+  text-align: left;
+
+  .error {
+    background: #EB4E25;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: -40px;
+  }
+}
