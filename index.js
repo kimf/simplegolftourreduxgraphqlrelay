@@ -5,6 +5,7 @@ import Relay from 'react-relay'
 import { RelayRouter } from 'react-router-relay'
 import { browserHistory } from 'react-router'
 import auth from './lib/AuthService'
+import NetworkLayer from './lib/NetworkLayer'
 
 import routes from './routes'
 
@@ -14,7 +15,7 @@ const devBuild = process.env.NODE_ENV !== 'production'
 const apiUrl = devBuild ? 'http://localhost:8123/queries' : 'http://home.fransman.se:8123/queries'
 
 Relay.injectNetworkLayer(
-  new Relay.DefaultNetworkLayer(apiUrl, {
+  new NetworkLayer(apiUrl, {
     headers: {
       Authorization: `Token ${auth.getToken()}`
     }

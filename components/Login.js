@@ -1,6 +1,11 @@
 import React, { PropTypes } from 'react'
 import auth from '../lib/AuthService'
+import NetworkLayer from '../lib/NetworkLayer'
 require('es6-promise').polyfill()
+import Relay from 'react-relay'
+
+const devBuild = process.env.NODE_ENV !== 'production'
+const apiUrl = devBuild ? 'http://localhost:8123/queries' : 'http://home.fransman.se:8123/queries'
 
 const logoSrc = require('../styles/images/logo.png')
 
@@ -28,6 +33,14 @@ const Login = React.createClass({
       if (!loggedIn) {
         return this.setState({ error: true })
       }
+
+      Relay.injectNetworkLayer(
+        new NetworkLayer(apiUrl, {
+          headers: {
+            Authorization: `Token ${auth.getToken()}`
+          }
+        })
+      )
 
       const { location } = this.props
 
