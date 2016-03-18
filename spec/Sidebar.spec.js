@@ -12,7 +12,7 @@ const tours = [
   { id: 2, name: 'En annan tour' }
 ]
 
-const wrapper = render(<Sidebar title={title} tours={tours} />)
+const wrapper = render(<Sidebar title={title} tours={tours} loggedIn />)
 
 describe('Sidebar', () => {
   it('shows the header', () => {
