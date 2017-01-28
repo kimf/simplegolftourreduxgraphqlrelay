@@ -1,5 +1,7 @@
 import React from 'react'
-import { IndexRoute, Route, Router } from 'react-router'
+import { applyRouterMiddleware, browserHistory, IndexRoute, Route, Router } from 'react-router'
+import useRelay from 'react-router-relay'
+import Relay from 'react-relay'
 
 import UserQueries from './queries/UserQueries'
 import TourQueries from './queries/TourQueries'
@@ -28,8 +30,13 @@ const requireAuth = (nextState, replace) => {
 }
 
 export default (
-  <Router>
-    <Route path="/"
+  <Router
+    history={browserHistory}
+    render={applyRouterMiddleware(useRelay)}
+    environment={Relay.Store}
+  >
+    <Route
+      path="/"
       component={SimpleGolftourLayout}
       queries={UserQueries}
       renderLoading={Loading}

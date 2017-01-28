@@ -46,7 +46,6 @@ export const Tour = ({ tour }) => (
             {tour.currentSeason.events.map(event =>
               <li key={event.id}>
                 {event.course}
-                {event.gametype}
                 {event.starts_at}
                 {event.scoring_type}
                 Team event? {event.team_event}
@@ -101,7 +100,6 @@ const TourContainer = Relay.createContainer(Tour, {
             scoring_type,
             team_event,
             status,
-            gametype,
             course,
             created_at,
             updated_at,

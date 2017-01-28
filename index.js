@@ -2,8 +2,6 @@ import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Relay from 'react-relay'
-import { RelayRouter } from 'react-router-relay'
-import { browserHistory } from 'react-router'
 import auth from './lib/AuthService'
 import NetworkLayer from './lib/NetworkLayer'
 
@@ -24,7 +22,7 @@ Relay.injectNetworkLayer(
 
 let render = () => {
   ReactDOM.render(
-    <RelayRouter history={browserHistory} routes={routes} />,
+    routes,
     rootEl
   )
 }

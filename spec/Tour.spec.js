@@ -12,7 +12,7 @@ const leaderboard = [
 ]
 
 const events = [
-  { course: 'Skövde GK', gametype: 'Scramble', starts_at: 'Tomorrow', scoring_type: 'Points' }
+  { course: 'Skövde GK', starts_at: 'Tomorrow', scoring_type: 'Points' }
 ]
 
 const currentSeason = {

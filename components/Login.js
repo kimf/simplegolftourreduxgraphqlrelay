@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
+import Relay from 'react-relay'
 import auth from '../lib/AuthService'
 import NetworkLayer from '../lib/NetworkLayer'
+
 require('es6-promise').polyfill()
-import Relay from 'react-relay'
 
 const devBuild = process.env.NODE_ENV !== 'production'
 const apiUrl = devBuild ? 'http://localhost:8123/queries' : 'http://home.fransman.se:8123/queries'
