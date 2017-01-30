@@ -8,16 +8,25 @@ const OfflinePlugin = require('offline-plugin')
 const bourbonPaths = require('bourbon').includePaths
 const neatPaths = require('bourbon-neat').includePaths
 
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// const extractSass = new ExtractTextPlugin({
+//   filename: '[name].[contenthash].css',
+//   disable: process.env.NODE_ENV === 'development'
+// })
+
 const developmentPlugins = [
-  new webpack.optimize.OccurenceOrderPlugin(),
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin(),
+  new webpack.NoEmitOnErrorsPlugin(),
   new OfflinePlugin()
 ]
 
 const productionPlugins = [
-  new webpack.optimize.OccurenceOrderPlugin(),
-  new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+  new webpack.optimize.UglifyJsPlugin({
+    minimize: true,
+    comprsess: {
+      warnings: true
+    }
+  }),
   new webpack.DefinePlugin({
     'process.env': {
       NODE_ENV: JSON.stringify('production')
@@ -39,36 +48,31 @@ module.exports = {
   },
   plugins: devBuild ? developmentPlugins : productionPlugins,
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
-      }
-    ],
-    loaders: [
-      {
-        test: /\.js$/,
-        loaders: ['babel'],
+        use: ['babel-loader'],
         exclude: /node_modules/,
         include: __dirname
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass'],
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [bourbonPaths, neatPaths]
+            }
+          }
+        ],
         include: path.join(__dirname, 'styles')
       },
       {
         test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=8192' // inline base64 URLs for <=8k images
+        use: 'url-loader?limit=8192' // inline base64 URLs for <=8k images
       }
     ]
-  },
-  sassLoader: {
-    includePaths: [bourbonPaths, neatPaths]
-  },
-  eslint: {
-    configFile: '.eslintrc',
-    emitWarning: true
   }
 }

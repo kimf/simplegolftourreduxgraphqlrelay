@@ -10,6 +10,7 @@ class SimpleGolftour extends Component {
     super(props)
 
     this.state = { loggedIn: auth.loggedIn() }
+    this.updateAuth = this.updateAuth.bind(this)
   }
 
   componentWillMount() {
@@ -41,12 +42,16 @@ class SimpleGolftour extends Component {
   }
 }
 
+SimpleGolftour.defaultProps = {
+  children: false
+}
+
 SimpleGolftour.propTypes = {
   currentUser: PropTypes.shape({
     name: PropTypes.string.isRequired,
     tours: PropTypes.array.isRequired
   }).isRequired,
-  children: PropTypes.isRequired
+  children: PropTypes.element
 }
 
 const SimpleGolftourLayout = Relay.createContainer(SimpleGolftour, {

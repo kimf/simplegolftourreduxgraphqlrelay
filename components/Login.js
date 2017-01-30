@@ -29,9 +29,9 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    const { email, pass } = this.state
+    const { email, password } = this.state
 
-    auth.login(email, pass, (loggedIn) => {
+    auth.login(email, password, (loggedIn) => {
       if (!loggedIn) {
         return this.setState({ error: true })
       }

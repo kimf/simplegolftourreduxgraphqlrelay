@@ -23,4 +23,8 @@ Schedule.propTypes = {
   }).isRequired
 }
 
+Schedule.defaultProps = {
+  currentUser: {}
+}
+
 export default Schedule

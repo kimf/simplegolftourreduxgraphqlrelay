@@ -23,4 +23,8 @@ Settings.propTypes = {
   }).isRequired
 }
 
+Settings.defaultProps = {
+  currentUser: {}
+}
+
 export default Settings

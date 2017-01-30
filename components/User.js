@@ -24,7 +24,7 @@ User.propTypes = {
 }
 
 User.defaultProps = {
-  currentUser: null
+  currentUser: {}
 }
 
 export default User
