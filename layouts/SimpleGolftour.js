@@ -1,31 +1,25 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import Relay from 'react-relay'
 import Sidebar from '../components/Sidebar'
 import auth from '../lib/AuthService'
 
 import '../styles/app.scss'
 
-const SimpleGolftour = React.createClass({
-  propTypes: {
-    currentUser: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      tours: PropTypes.array.isRequired
-    }).isRequired,
-    children: PropTypes.object.isRequired
-  },
+class SimpleGolftour extends Component {
+  constructor(props) {
+    super(props)
 
-  getInitialState() {
-    return { loggedIn: auth.loggedIn() }
-  },
+    this.state = { loggedIn: auth.loggedIn() }
+  }
 
   componentWillMount() {
     auth.onChange = this.updateAuth
     auth.login()
-  },
+  }
 
   updateAuth(loggedIn) {
     this.setState({ loggedIn })
-  },
+  }
 
   render() {
     const { currentUser, children } = this.props
@@ -45,7 +39,15 @@ const SimpleGolftour = React.createClass({
       </div>
     )
   }
-})
+}
+
+SimpleGolftour.propTypes = {
+  currentUser: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    tours: PropTypes.array.isRequired
+  }).isRequired,
+  children: PropTypes.isRequired
+}
 
 const SimpleGolftourLayout = Relay.createContainer(SimpleGolftour, {
   fragments: {

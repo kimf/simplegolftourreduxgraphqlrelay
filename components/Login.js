@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import Relay from 'react-relay'
 import auth from '../lib/AuthService'
 import NetworkLayer from '../lib/NetworkLayer'
@@ -6,29 +6,30 @@ import NetworkLayer from '../lib/NetworkLayer'
 require('es6-promise').polyfill()
 
 const devBuild = process.env.NODE_ENV !== 'production'
-const apiUrl = devBuild ? 'http://localhost:8123/queries' : 'http://home.fransman.se:8123/queries'
+const apiUrl = devBuild
+               ? 'http://localhost:8123/api/queries'
+               : 'http://home.fransman.se:8123/api/queries'
 
 const logoSrc = require('../styles/images/logo.png')
 
-const Login = React.createClass({
-  propTypes: {
-    location: PropTypes.any,
-    error: PropTypes.bool
-  },
+class Login extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { error: false, email: '', password: '' }
 
-  contextTypes: {
-    router: PropTypes.object.isRequired
-  },
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
 
-  getInitialState() {
-    return { error: false }
-  },
+  handleChange(event) {
+    const { value, name } = event.target
+    this.setState({ [name]: value })
+  }
 
   handleSubmit(e) {
     e.preventDefault()
 
-    const email = this.refs.email.value
-    const pass = this.refs.pass.value
+    const { email, pass } = this.state
 
     auth.login(email, pass, (loggedIn) => {
       if (!loggedIn) {
@@ -50,28 +51,42 @@ const Login = React.createClass({
       } else {
         this.context.router.replace('/')
       }
+
+      return true
     })
-  },
+  }
 
   render() {
+    const { email, password } = this.state
     return (
       <div className="application login">
         <section className="main">
           <figure className="logo">
-            <img src={logoSrc} alt="Logo Image" />
+            <img src={logoSrc} alt="Logo" />
           </figure>
 
           <form onSubmit={this.handleSubmit}>
             {this.state.error && (
               <p className="error">Bad login information</p>
             )}
-            <label>
+            <label htmlFor="email">
               Email
-              <input ref="email" name="email" placeholder="email@domain.com" />
+              <input
+                value={email}
+                name="email"
+                placeholder="email@domain.com"
+                onChange={this.handleChange}
+              />
             </label>
-            <label>
+            <label htmlFor="password">
               Password
-              <input ref="pass" name="password" placeholder="minimum 3 characters" />
+              <input
+                value={password}
+                name="password"
+                type="password"
+                placeholder="minimum 3 characters"
+                onChange={this.handleChange}
+              />
             </label>
             <button type="submit">Login</button>
           </form>
@@ -79,6 +94,18 @@ const Login = React.createClass({
       </div>
     )
   }
-})
+}
+
+Login.defaultProps = { location: '' }
+
+Login.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      nextPathname: PropTypes.string
+    })
+  })
+}
+
+Login.contextTypes = { router: PropTypes.object.isRequired }
 
 export default Login

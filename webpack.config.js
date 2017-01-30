@@ -3,11 +3,16 @@ const webpack = require('webpack')
 
 const devBuild = process.env.NODE_ENV !== 'production'
 
-// new webpack.optimize.DedupePlugin(),
+const OfflinePlugin = require('offline-plugin')
+
+const bourbonPaths = require('bourbon').includePaths
+const neatPaths = require('bourbon-neat').includePaths
 
 const developmentPlugins = [
   new webpack.optimize.OccurenceOrderPlugin(),
-  new webpack.HotModuleReplacementPlugin()
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NoErrorsPlugin(),
+  new OfflinePlugin()
 ]
 
 const productionPlugins = [
@@ -17,7 +22,8 @@ const productionPlugins = [
     'process.env': {
       NODE_ENV: JSON.stringify('production')
     }
-  })
+  }),
+  new OfflinePlugin()
 ]
 
 module.exports = {
@@ -36,7 +42,8 @@ module.exports = {
     preLoaders: [
       {
         test: /\.js$/,
-        loader: 'eslint-loader', exclude: /node_modules/
+        loader: 'eslint-loader',
+        exclude: /node_modules/
       }
     ],
     loaders: [
@@ -58,10 +65,7 @@ module.exports = {
     ]
   },
   sassLoader: {
-    includePaths: [
-      require('bourbon').includePaths,
-      require('bourbon-neat').includePaths
-    ]
+    includePaths: [bourbonPaths, neatPaths]
   },
   eslint: {
     configFile: '.eslintrc',

@@ -18,55 +18,55 @@ export const Tour = ({ tour }) => (
       </ul>
     </header>
     <section className="content">
-        <h3>Leaderboard</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Events</th>
-              <th>Average</th>
-              <th>Points</th>
+      <h3>Leaderboard</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Events</th>
+            <th>Average</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tour.currentSeason.leaderboard.map(user =>
+            <tr key={user.id}>
+              <td>{user.position}</td>
+              <td>{user.name}</td>
+              <td>{user.num_events}</td>
+              <td>{user.average}</td>
+              <td>{user.total_points}</td>
             </tr>
-          </thead>
-          <tbody>
-            {tour.currentSeason.leaderboard.map(user =>
-              <tr key={user.id}>
-                <td>{user.position}</td>
-                <td>{user.name}</td>
-                <td>{user.num_events}</td>
-                <td>{user.average}</td>
-                <td>{user.total_points}</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-        <h3>Events</h3>
-          <ul>
-            {tour.currentSeason.events.map(event =>
-              <li key={event.id}>
-                {event.course}
-                {event.starts_at}
-                {event.scoring_type}
-                Team event? {event.team_event}
-              </li>
-            )}
-          </ul>
+          )}
+        </tbody>
+      </table>
+      <h3>Events</h3>
+      <ul>
+        {tour.currentSeason.events.map(event =>
+          <li key={event.id}>
+            {event.course}
+            {event.starts_at}
+            {event.scoring_type}
+            Team event? {event.team_event}
+          </li>
+        )}
+      </ul>
     </section>
   </div>
 )
 
 Tour.propTypes = {
   tour: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    seasons: PropTypes.array,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    seasons: PropTypes.array.isRequired,
     currentSeason: PropTypes.shape({
-      id: PropTypes.string,
-      leaderboard: PropTypes.array,
-      events: PropTypes.array
-    })
-  })
+      id: PropTypes.string.isRequired,
+      leaderboard: PropTypes.array.isRequired,
+      events: PropTypes.array.isRequired
+    }).isRequired
+  }).isRequired
 }
 
 const TourContainer = Relay.createContainer(Tour, {

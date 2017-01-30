@@ -12,12 +12,14 @@
   "license": "ISC",
   "metadata": {
     "graphql": {
-      "schema": "../server_simple_golftour/public/relay/schema.json"
+      "schema": "../../Golftour/public/relay/schema.json"
     }
   },
   "dependencies": {
     "babel-polyfill": "^6.7.2",
     "es6-promise": "^4.0.5",
+    "isomorphic-fetch": "^2.2.1",
+    "offline-plugin": "^4.5.5",
     "react": "^15.0.0-rc.2",
     "react-addons-css-transition-group": "^15.0.0-rc.2",
     "react-dom": "^15.0.0-rc.2",
@@ -48,13 +50,11 @@
     "express": "^4.13.4",
     "express-history-api-fallback": "^2.0.0",
     "file-loader": "^0.10.0",
-    "isomorphic-fetch": "^2.2.1",
     "mocha": "^3.2.0",
     "neat": "^1.2.2",
     "node-sass": "^4.4.0",
     "react-addons-test-utils": "^15.0.0-rc.2",
     "react-dom": "^15.0.0-rc.2",
-    "redbox-react": "^1.3.3",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.0",
     "sync-request": "^4.0.1",

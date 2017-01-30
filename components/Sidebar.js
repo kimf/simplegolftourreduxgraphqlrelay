@@ -6,7 +6,7 @@ const logoSrc = require('../styles/images/logo.png')
 const Sidebar = ({ title, tours, loggedIn }) => (
   <aside className="sidebar">
     <figure className="logo">
-      <img src={logoSrc} alt="Logo Image" />
+      <img src={logoSrc} alt="Logo" />
     </figure>
 
     <nav>
@@ -54,7 +54,7 @@ const Sidebar = ({ title, tours, loggedIn }) => (
 
 Sidebar.propTypes = {
   title: PropTypes.string.isRequired,
-  tours: PropTypes.array.isRequired,
+  tours: PropTypes.arrayOf(PropTypes.object).isRequired,
   loggedIn: PropTypes.bool.isRequired
 }
 

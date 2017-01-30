@@ -5,8 +5,7 @@ const Loading = () => (
     <header className="contentheader">
       … Loading …
     </header>
-    <section className="content">
-    </section>
+    <section className="content" />
   </div>
 )
 

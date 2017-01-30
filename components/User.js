@@ -20,7 +20,11 @@ User.propTypes = {
   currentUser: PropTypes.shape({
     name: PropTypes.string,
     email: PropTypes.string
-  })
+  }).isRequired
+}
+
+User.defaultProps = {
+  currentUser: null
 }
 
 export default User
